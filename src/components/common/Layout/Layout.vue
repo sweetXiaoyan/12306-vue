@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import Login from '../../../components/pages/Login/login'
+    import Login from '../../../pages/Login/login'
     export default {
         name: 'hello',
         components:{
@@ -20,7 +20,7 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
     h1, h2 {
         font-weight: normal;
     }
