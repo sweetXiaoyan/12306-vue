@@ -12,14 +12,22 @@
             <form>
                 <div class="user">
                     <p>账号</p>
-                    <input type="text" name="username" placeholder="15841695327">
+                    <input type="text" name="username" placeholder="请输入您的账号">
                     <i class="icon-clear"></i>
                 </div>
                 <div class="pwd">
                     <p>密码</p>
-                    <input type="password" name="password" placeholder="******">
+                    <input type="password" name="password" placeholder="请输入您的6-20位密码">
+                    <i class="icon-clear"></i>
                 </div>
             </form>
+        </div>
+        <div class="pwdHandle">
+            <span class="rememberPwd">
+                <input type="checkbox">
+                <span>记住密码</span>
+            </span>
+            <a class="forgetPwd" href="javascript:;">忘记密码</a>
         </div>
     </div>
 </template>
@@ -46,7 +54,7 @@
         }
         .subLogin{
             width: 100%;
-            padding: 10px;
+            padding: 10px 15px;
             form{
                 div{
                     margin-bottom: 10px;
@@ -69,6 +77,11 @@
                             /*width: 90%;*/
                             border-bottom: 1px solid #1fcca9;
                         }
+                    }
+                    .icon-clear{
+                        position: absolute;
+                        right: 30px;
+                        top: 24px;
                     }
                     .icon-clear:before{
                         content: '\e902';
