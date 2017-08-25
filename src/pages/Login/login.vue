@@ -24,10 +24,20 @@
         </div>
         <div class="pwdHandle">
             <span class="rememberPwd">
-                <input type="checkbox">
+               <span class="checkbox1">
+                   <input type="checkbox" value="0" class="isRemember"
+                          id="checkbox-isRemember" style="display: none;">
+                   <label for="checkbox-isRemember"></label>
+               </span>
                 <span>记住密码</span>
             </span>
-            <a class="forgetPwd" href="javascript:;">忘记密码</a>
+            <a class="forgetPwd" href="javascript:;">忘记密码?</a>
+        </div>
+        <div class="loginBtn">
+            <span>登 录</span>
+        </div>
+        <div class="regNav">
+            <span>新用户？<a href="javascript:;">立即注册</a></span>
         </div>
     </div>
 </template>
@@ -36,6 +46,8 @@
 </script>
 <style lang="less">
     .login{
+        position: relative;
+        height: 100%;
         .topBar{
             width: 100%;
             height: 44px;
@@ -68,7 +80,7 @@
                         width: 90%;
                         border: none;
                         border-bottom: 1px solid #f6f8fc;
-                        padding: 8px 2px;
+                        padding: 14px 2px;
                         font-size: 11px;
                         outline: none;
                         color: #bdbdbd;
@@ -91,6 +103,51 @@
 
                 }
             }
+        }
+        .pwdHandle{
+            color:#B9B9B9;
+            padding: 0 20px;
+            height: 20px;
+            line-height: 20px;
+            .rememberPwd{
+                span{
+                    font-size: 13px;
+                }
+                .checkbox1{
+                    label{
+                        vertical-align: middle;
+                        margin-bottom: 2px;
+                    }
+                }
+                .checkbox1 +span{
+                    vertical-align: middle;
+                }
+            }
+            a{
+                font-size: 13px;
+                color: #B9B9B9;
+                cursor: pointer;
+                float: right;
+            }
+        }
+        .loginBtn{
+            width:100%;
+            text-align: center;
+            margin-top: 30px;
+            span{
+                display: inline-block;
+                width: 84%;
+                background-color: #1fcca9;
+                height: 46px;
+                line-height: 46px;
+                border-radius: 6px;
+                font-size: 16px;
+                color: #f2f2f2;
+            }
+        }
+        .regNav{
+            position: absolute;
+            bottom: 10px;
         }
     }
     .icon-back:before {
