@@ -1,6 +1,8 @@
 <template>
     <div class="layout">
-        <login></login>
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -9,7 +11,6 @@
     export default {
         name: 'hello',
         components:{
-            Login
         },
         data () {
             return {
@@ -21,6 +22,12 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
+    .fade-enter-active{
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+        opacity: 0
+    }
     h1, h2 {
         font-weight: normal;
     }

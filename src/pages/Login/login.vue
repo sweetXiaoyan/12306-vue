@@ -12,13 +12,13 @@
             <form>
                 <div class="user">
                     <p>账号</p>
-                    <input type="text" name="username" placeholder="请输入您的账号">
-                    <i class="icon-clear"></i>
+                    <input type="text" name="username" placeholder="请输入您的账号" v-model="username">
+                    <i class="icon-clear" @click="clearUer"></i>
                 </div>
                 <div class="pwd">
                     <p>密码</p>
-                    <input type="password" name="password" placeholder="请输入您的6-20位密码">
-                    <i class="icon-clear"></i>
+                    <input type="password" name="password" placeholder="请输入您的6-20位密码" v-model="password">
+                    <i class="icon-clear" @click="clearPwd"></i>
                 </div>
             </form>
         </div>
@@ -31,20 +31,39 @@
                </span>
                 <span>记住密码</span>
             </span>
-            <a class="forgetPwd" href="javascript:;">忘记密码?</a>
+            <router-link to="/reg">忘记密码?</router-link>
         </div>
         <div class="loginBtn">
             <span>登 录</span>
         </div>
         <div class="regNav">
-            <span>新用户？<a href="javascript:;">立即注册</a></span>
+            <span>新用户？<router-link to="/reg">立即注册</router-link>
+            </span>
         </div>
     </div>
 </template>
 <script>
+    export default {
+        name:'login',
+        data(){
+            return{
+                username:'',
+                password:'',
+            }
+        },
+        methods:{
+            clearUer(){
+                this.username ="";
+                console.log(111);
+            },
+            clearPwd(){
+                this.password ="";
+            }
+        }
+    }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
     .login{
         position: relative;
         height: 100%;
@@ -93,12 +112,14 @@
                     .icon-clear{
                         position: absolute;
                         right: 30px;
-                        top: 24px;
+                        top: 30px;
+                        cursor: pointer;
                     }
                     .icon-clear:before{
                         content: '\e902';
                         color: #bdbdbd;
                     }
+
 
 
                 }
@@ -146,10 +167,20 @@
             }
         }
         .regNav{
-            position: absolute;
-            bottom: 10px;
+            width: 100%;
+            position: fixed;
+            bottom: 20px;
+            text-align: center;
+            span{
+                font-size: 14px;
+                color: #B9B9B9;
+                a{
+                    color: #1fcca9;
+                }
+            }
         }
     }
+
     .icon-back:before {
         content: "\e901";
         font-size: 24px;
