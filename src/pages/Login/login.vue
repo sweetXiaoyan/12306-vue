@@ -13,12 +13,12 @@
                 <div class="user">
                     <p>账号</p>
                     <input type="text" name="username" placeholder="请输入您的账号" v-model="username">
-                    <i class="icon-clear" @click="clearUer"></i>
+                    <i v-if="username" class="icon-clear" @click="clearUer"></i>
                 </div>
                 <div class="pwd">
                     <p>密码</p>
-                    <input type="password" name="password" placeholder="请输入您的6-20位密码" v-model="password">
-                    <i class="icon-clear" @click="clearPwd"></i>
+                    <input type="password" name="password" placeholder="请输入您的6-20位密码" v-model="password" @blur="showClearIcon=true">
+                    <i v-if="password" class="icon-clear" @click="clearPwd" v-show=""></i>
                 </div>
             </form>
         </div>
@@ -34,7 +34,7 @@
             <router-link to="/reg">忘记密码?</router-link>
         </div>
         <div class="loginBtn">
-            <span>登 录</span>
+            <router-link to="/home" @click="login">登 录</router-link>
         </div>
         <div class="regNav">
             <span>新用户？<router-link to="/reg">立即注册</router-link>
@@ -49,16 +49,29 @@
             return{
                 username:'',
                 password:'',
+                showClearIcon:false
             }
         },
         methods:{
             clearUer(){
                 this.username ="";
-                console.log(111);
             },
             clearPwd(){
                 this.password ="";
-            }
+            },
+          login(){
+            console.log(this.$http);
+            this.$http.post('/users/login',{
+
+              username:this.username,
+              password:this.password,
+            }).then(res =>{
+              console.log(res);
+
+            }).catch(err =>{
+              console.log(err);
+            })
+          }
         }
     }
 
@@ -155,7 +168,7 @@
             width:100%;
             text-align: center;
             margin-top: 30px;
-            span{
+            a{
                 display: inline-block;
                 width: 84%;
                 background-color: #1fcca9;
