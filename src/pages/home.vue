@@ -35,11 +35,10 @@
             <div class="train-search-type">
                 <span class="train-type">
                     <span>高铁动车</span>
-                    <el-check></el-check>
+                    <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
                 </span>
                 <span class="customer-type">
                     <span>学生票</span>
-                    <el-check></el-check>
                 </span>
             </div>
             <div class="train-search-btn">
@@ -68,6 +67,17 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+        name:'home',
+        data(){
+            return{
+                checked:true,
+            }
+        }
+    }
+</script>
 
 <style lang="less" scoped>
     .home{
@@ -188,7 +198,17 @@
                     span{
                         font-size: 12px;
                         color: black;
+                        vertical-align: middle;
                     }
+                    a{
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border: 1px solid #a2a2a2;
+                        border-radius: 2px;
+                        vertical-align: middle;
+                    }
+
                 }
                 .customer-type{
                     float: right;

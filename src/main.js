@@ -11,11 +11,7 @@ Vue.prototype.$http = axios
 
 //注册全局组件
 var elCheck = Vue.extend({
-    template:' <span class="checkbox">\n' +
-    '<input type="checkbox" value="0" class="isRemember"\n' +
-    'id="checkbox-isRemember" style="display: none;">\n' +
-    '<label for="checkbox-isRemember"></label>\n' +
-    '</span>'
+    template:"<a  :class='checked ? '':'checked'' @click='checked = !checked'></a>"
 });
 Vue.component('el-check',elCheck);
 /* eslint-disable no-new */
