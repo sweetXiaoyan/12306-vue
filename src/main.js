@@ -9,11 +9,6 @@ import './assets/less/index.less'
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
-//注册全局组件
-var elCheck = Vue.extend({
-    template:"<a  :class='checked ? '':'checked'' @click='checked = !checked'></a>"
-});
-Vue.component('el-check',elCheck);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

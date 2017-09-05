@@ -39,13 +39,15 @@
                 </span>
                 <span class="customer-type">
                     <span>学生票</span>
+                    <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
                 </span>
             </div>
             <div class="train-search-btn">
-                <a href="javascript:;">查 询</a>
+                <a href="javascript:;" class="searchBtn">
+                    <i class="icon-search"></i>查 询</a>
             </div>
             <div class="train-search-tips">
-                <span class="tips-icon"></span>
+                <span class="icon-tips"></span>
                 <span class="tips-content">
                     <span>深圳-上海</span>
                     <span>深圳-呼和浩特</span>
@@ -57,13 +59,33 @@
             </div>
         </div>
         <div class="home-section">
-
+            <div class="section">
+                <span class="icon-train"></span>
+                <p>正晚点</p>
+            </div>
+            <div class="section">
+                <span class="icon-order"></span>
+                <p>订餐服务</p>
+                <i class="hot">红包</i>
+            </div>
+            <div class="section">
+                <span class="icon-taxi"></span>
+                <p>约车服务</p>
+            </div>
         </div>
         <div class="home-notice">
+            <span class="icon-notice"></span>
+            <span class="notice-content">
+                温馨提示：铁路12306每日06：00-23：00提供服务，在铁路12306购票，改签和退票须不晚于开车前30分钟
+            </span>
+            <span class="icon-notice-clear"></span>
 
         </div>
         <div class="nav">
-
+            <div class="nav-item" v-for="(item,index) in navList" v-bind:class="{'active-color':curIndex ===index}" @click="curIndex = index">
+                <span :class="item.iconName"></span>
+                <p>{{item.iconContent}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -74,6 +96,27 @@
         data(){
             return{
                 checked:true,
+//                底部nav当前选中项
+                curIndex:0,
+//                底部nav数据
+                navList:[
+                    {
+                        iconName:'icon-ticket',
+                        iconContent:'车票预订'
+                    },
+                    {
+                        iconName:'icon-service',
+                        iconContent:'商旅服务'
+                    },
+                    {
+                        iconName:'icon-center',
+                        iconContent:'订单中心'
+                    },
+                    {
+                        iconName:'icon-my',
+                        iconContent:'我的12306'
+                    },
+                ]
             }
         }
     }
@@ -83,6 +126,8 @@
     .home{
         width: 100%;
         background-color: #edf1fa;
+        height:100%;
+        padding-bottom:30px;
         /*轮播图*/
         .slider{
             li{
@@ -204,14 +249,72 @@
                         display: inline-block;
                         width: 10px;
                         height: 10px;
-                        border: 1px solid #a2a2a2;
+                        border: 1px solid #bdbdbd;
                         border-radius: 2px;
                         vertical-align: middle;
+                        margin-left: 2px;
                     }
 
                 }
                 .customer-type{
                     float: right;
+                    font-size: 12px;
+                    color: #bdbdbd;
+                    span{
+                        vertical-align: middle;
+                    }
+                    a{
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border: 1px solid #bdbdbd;
+                        border-radius: 2px;
+                        vertical-align: middle;
+                        margin-left: 2px;
+                    }
+                }
+            }
+            .train-search-btn{
+                .searchBtn{
+                    display: block;
+                    background-color: #21d9b4;
+                    height: 42px;
+                    border-radius: 4px;
+                    line-height: 42px;
+                    text-align: center;
+                    color: #ffffff;
+                    cursor: pointer;
+                    .icon-search::after{
+                        content: "\e903";
+                        padding: 0 6px;
+                    }
+                }
+            }
+            .train-search-tips{
+                margin-top: 16px;
+                font-size: 12px;
+                color: #bdbdbd;
+
+                .icon-tips::after{
+                    content: "\e912";
+                    font-size: 14px;
+                    margin-right: 4px;
+                    color: #21d9b4;
+                    vertical-align: middle;
+                }
+                .tips-content{
+                    vertical-align: middle;
+                    span{
+                        padding: 0 4px;
+                    }
+                }
+                /*清除全部*/
+                .tips-clear{
+                    text-align: right;
+                    a{
+                        color: #bdbdbd;
+                    }
+
                 }
 
             }
@@ -219,6 +322,129 @@
 
 
         }
+
+        /*其他服务*/
+        .home-section{
+            width: 100%;
+            background-color: #fff;
+            margin-top: 20px;
+            margin-bottom: 16px;
+            height: 100px;
+            display: flex;
+            padding: 20px 0;
+            box-sizing: border-box;
+            .section{
+                flex: 1;
+                text-align: center;
+                position: relative;
+                span{
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    background-color: rgba(31,204,169,0.1);
+                    border-radius: 50%;
+                    font-size: 20px;
+                    color: #1fcca9;
+                }
+                p{
+                    font-size: 12px;
+                    margin-top: 10px;
+                    color: #b6b6b6;
+                }
+                .icon-train::after{
+                    content: "\e907";
+                }
+                .icon-order::after{
+                    content: "\e921";
+                }
+                .icon-taxi::after{
+                    content: "\e922";
+                }
+                i{
+                    position: absolute;
+                    top: 0;
+                    left: 55%;
+                }
+            }
+        }
+
+        /*温馨提示*/
+        .home-notice{
+            width: 100%;
+            background-color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .icon-notice{
+                float: left;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(31,204,169,0.1);
+                border-radius: 50%;
+                line-height: 40px;
+                text-align: center;
+                margin-left: 20px;
+                margin-right:20px;
+            }
+            .icon-notice::after{
+                content: "\e916";
+                color: #1fcca9;
+                font-size: 24px;
+            }
+            .notice-content{
+                font-size: 12px;
+                color: #bdbdbd;
+            }
+        }
+
+        /*底部nav*/
+        .nav{
+            width: 100%;
+            height: 50px;
+            background-color: #fff;
+            position: fixed;
+            bottom: 0;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            display: flex;
+            .nav-item{
+                flex: 1;
+                text-align: center;
+                font-size: 10px;
+                padding: 5px;
+                color: #bdbdbd;
+                span{
+                    font-size: 20px;
+                }
+                .icon-ticket::after{
+                    content: "\e90f";
+                }
+                .icon-service::after{
+                    content: "\e904";
+                }
+                .icon-center::after{
+                    content: "\e908";
+                }
+                .icon-my::after{
+                    content: "\e900";
+                }
+            }
+        }
+    }
+    .hot{
+        width: 36px;
+        height: 20px;
+        font-size: 12px;
+        padding-top: 2px;
+        -webkit-transform: scale(0.6,0.6);
+        font-style: normal;
+        background-color: #ff3146;
+        border-radius: 6px;
+        color: white;
+    }
+    /*选中设置颜色*/
+    .active-color{
+        color: #1fcca9 !important;
     }
 
 </style>
