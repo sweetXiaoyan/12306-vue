@@ -1,10 +1,10 @@
 <template>
     <div class="login">
-        <div class="topBar">
-            <a href="javascript:;">
-                <i class="icon-back"></i>
-            </a>
-        </div>
+        <!--<div class="topBar">-->
+            <!--<a href="javascript:;" class="icon-back"></a>-->
+            <!--<span>选择城市</span>-->
+        <!--</div>-->
+        <top-nav :showContent="showContent"></top-nav>
         <div class="logoImg">
             <img src="../../assets/images/logo.png" alt="">
         </div>
@@ -43,13 +43,21 @@
     </div>
 </template>
 <script>
+    import TopNav from '../../components/common/topNav/topNav'
     export default {
         name:'login',
+        components:{
+            TopNav
+        },
         data(){
             return{
                 username:'',
                 password:'',
-                showClearIcon:false
+                showClearIcon:false,
+                showContent:{
+                    showBack:true,
+                    titleContent:""
+                }
             }
         },
         methods:{
@@ -80,16 +88,6 @@
     .login{
         position: relative;
         height: 100%;
-        .topBar{
-            width: 100%;
-            height: 44px;
-            text-align: left;
-            background-color: #1fcca9;
-            a{
-                display: inline-block;
-                margin-top: 10px;
-            }
-        }
         .logoImg{
             width: 100%;
             text-align: center;
@@ -194,9 +192,5 @@
         }
     }
 
-    .icon-back:before {
-        content: "\e901";
-        font-size: 24px;
-        color:white ;
-    }
+
 </style>

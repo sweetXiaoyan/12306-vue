@@ -1,6 +1,7 @@
 <template>
     <!--主页-->
     <div class="home">
+        <top-nav :showContent="showContent"></top-nav>
         <ul class="slider">
             <li>
                 <span></span>
@@ -11,7 +12,8 @@
             <div class="train-search-place clearfix">
                 <span class="place-start">
                     <span>始发站</span>
-                    <a href="javascript:;">深圳</a>
+                    <!--<a href="javascript:;">深圳</a>-->
+                    <router-link to="/address">深圳</router-link>
                 </span>
                 <span class="place-to">
                     <i class="icon-come-back"></i>
@@ -91,10 +93,19 @@
 </template>
 
 <script>
+    import TopNav from '../components/common/topNav/topNav'
     export default{
         name:'home',
+        components:{
+            TopNav
+        },
         data(){
             return{
+//                顶部导航
+                showContent:{
+                    showBack:false,
+                    titleContent:'车票预定'
+                },
                 checked:true,
 //                底部nav当前选中项
                 curIndex:0,
@@ -117,6 +128,7 @@
                         iconContent:'我的12306'
                     },
                 ]
+
             }
         }
     }
@@ -135,7 +147,7 @@
                 span{
                     display: inline-block;
                     width: 100%;
-                    height: 156px;
+                    height: 114px;
                     background-color: #1ec7a9;
                 }
             }
