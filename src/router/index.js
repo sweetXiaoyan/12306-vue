@@ -7,6 +7,7 @@ import Address from '../pages/address'
 Vue.use(VueRouter)
 
 export default  new VueRouter({
+    mode:'history',
     routes:[
         {
             path:'/',

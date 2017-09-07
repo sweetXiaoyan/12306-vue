@@ -1,13 +1,11 @@
 <template>
     <div class="checkAddress">
         <top-nav :showContent="showContent"></top-nav>
-
         <!--搜索框-->
         <div class="search">
             <span class="icon-search"></span>
             <input  type="text" placeholder="中文/拼音/首字母">
         </div>
-
         <!--位置推荐-->
         <div class="quick-location">
             <!--定位推荐-->
@@ -48,7 +46,6 @@
                 </div>
             </div>
         </div>
-
         <!--字母定位-->
         <div class="spell-location">
             <div class="city">
@@ -61,7 +58,6 @@
                     <li><a href="javascript:;">阿里地区</a></li>
                     <li><a href="javascript:;">安康市</a></li>
                 </ul>
-
             </div>
             <div class="city">
                 <span class="city-litter" id="B">B</span>
@@ -76,7 +72,20 @@
 
             </div>
 
+            <!--字母快速定位-->
+            <div class="link-address">
+                <ul class="link-item">
+                    <li><a href="javascript:;">推荐</a></li>
+                    <li><a href="javascript:;">历史</a></li>
+                    <li><a href="javascript:;">热门</a></li>
+                    <li><a href="javascript:;">A</a></li>
+                    <li><a href="javascript:;">B</a></li>
+                    <li><a href="javascript:;">C</a></li>
+                </ul>
+            </div>
+
         </div>
+
     </div>
 </template>
 
@@ -138,9 +147,8 @@
 
         /*快速定位*/
         .quick-location{
-            width: 98%;
-            margin-left: 1%;
-            padding:0 12px 20px 12px;
+            width: 100%;
+            padding:0 12px 20px 16px;
             background-color: #fff;
             box-sizing: border-box;
             .location{
@@ -179,21 +187,47 @@
         /*字母定位*/
         .spell-location{
             width: 100%;
-            padding-left: 16px;
             box-sizing: border-box;
             .city{
+                margin-top:10px;
                 .city-litter{
-
+                    margin-left: 16px;
+                    display: inline-block;
+                    margin-bottom:6px;
                 }
                 .city-list{
+                    padding-left: 16px;
+                    padding-bottom: 10px;
+                    background-color: #fff;
+                    border-bottom-left-radius: 6px;
+                    border-bottom-right-radius: 6px;
                     li{
-
+                        border-bottom: 1px solid #f2f2f2;
+                        line-height: 42px;
+                        a{
+                            color: black;
+                        }
                     }
                 }
             }
 
         }
-
+        /*字母链接*/
+        .link-address{
+            position: fixed;
+            top:100px;
+            right: 10px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 24px;
+            .link-item{
+                li{
+                    a{
+                        color: #1fcca9;
+                    }
+                }
+            }
+        }
         ::-webkit-input-placeholder { /* WebKit browsers */
             color: #d5d5d5;
         }

@@ -1,0 +1,31 @@
+[
+  {
+    "userId": "001",
+    "username": "zhangsan",
+    "phoneNum": "15841695327",
+    "mail": "1027535391@qq.com",
+    "location": "北京",
+    "historyLocation": [
+      "北京",
+      "上海",
+      "杭州",
+      "宜宾"
+    ],
+    "orderList": [
+      {
+        "orderId": "130420154",
+        "orderTime": "2017-01-01",
+        "startAddress": "北京西",
+        "endAddress": "锦州",
+        "trainId": "G34",
+        "startTime": "07:52",
+        "overTime": "18:21",
+        "used": true,
+        "warn": false,
+        "buyer": "李思",
+        "seatType": "一等座",
+        "seatNum": "03车厢110号"
+      }
+    ]
+  }
+  ]

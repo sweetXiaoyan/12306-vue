@@ -6,7 +6,7 @@ var Login = require('../modules/login');
 
 // console.log(mongoose);
 // 链接mongodb数据库
-mongoose.connect('mongodb://127.0.0.1:27017/customer');
+mongoose.connect('mongodb://127.0.0.1:27017/traindb');
 
 //监听是否连接成功
 mongoose.connection.on("connected",function () {
@@ -18,6 +18,7 @@ mongoose.connection.on('error',function () {
 });
 
 /* GET users listing. */
+
 router.get('/',function (req,res,next) {
   Login.find({},function (err,doc) {
     if (err){
@@ -26,14 +27,22 @@ router.get('/',function (req,res,next) {
         msg:err.message
       });
     }else {
+      if (doc){
+        res.json({
+          status:'0',
+          msg:'',
+          result:{
+            count:doc.length,
+            list:doc
+          }
+        });
+        return
+      }
       res.json({
-        status:'0',
-        msg:'',
-        result:{
-          count:doc.length,
-          list:doc
-        }
+        status:'001',
+        msg:"用户名或者密码错误！"
       })
+
     }
   })
 
@@ -62,7 +71,7 @@ router.post('/login',function (req,res,next) {
         })
       }else {
         res.json({
-          status:"1",
+          status:"2",
           msg:"用户名或密码错误",
           result:{}
         })

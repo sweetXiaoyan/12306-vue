@@ -12,7 +12,7 @@
             <form>
                 <div class="user">
                     <p>账号</p>
-                    <input type="text" name="username" placeholder="请输入您的账号" v-model="username">
+                    <input type="text" name="username" placeholder="请输入您的账号" v-model="username"  autocomplete="off">
                     <i v-if="username" class="icon-clear" @click="clearUer"></i>
                 </div>
                 <div class="pwd">
@@ -34,7 +34,7 @@
             <router-link to="/reg">忘记密码?</router-link>
         </div>
         <div class="loginBtn">
-            <router-link to="/home" @click="login">登 录</router-link>
+            <a @click="loginCheck">登 录</a>
         </div>
         <div class="regNav">
             <span>新用户？<router-link to="/reg">立即注册</router-link>
@@ -67,14 +67,18 @@
             clearPwd(){
                 this.password ="";
             },
-          login(){
-            console.log(this.$http);
+          loginCheck(){
             this.$http.post('/users/login',{
-
               username:this.username,
               password:this.password,
             }).then(res =>{
-              console.log(res);
+              let status = res.data.status;
+              if (status ==1){
+                this.$router.push('/home');
+              }
+              else {
+                alert(res.data.msg);
+              }
 
             }).catch(err =>{
               console.log(err);

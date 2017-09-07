@@ -1,6 +1,6 @@
 <template>
     <div class="topBar">
-        <a href="javascript:;" class="icon-back" v-if="showContent.showBack"></a>
+        <a href="javascript:;" class="icon-back" v-if="showContent.showBack" @click="back"></a>
         <span v-if="showContent.titleContent">{{showContent.titleContent}}</span>
     </div>
 </template>
@@ -15,7 +15,12 @@
                     return {};
                 }
             }
+        },
+      methods:{
+        back(){
+          this.$router.go(-1);
         }
+      }
     }
 </script>
 
