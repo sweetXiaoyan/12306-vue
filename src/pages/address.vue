@@ -13,7 +13,7 @@
                 <div class="location-item">
                     <span>根据您的定位推荐</span>
                     <ul class="item-box clearfix">
-                        <li class="city-name"><a href="javascript:;">北京</a></li>
+                        <li class="city-name"><a href="javascript:;">{{curCity}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         <li class="city-name"><a href="javascript:;">宜宾</a></li>
                         <li class="city-name"><a href="javascript:;">兴城</a></li>
                         <li class="city-name"><a href="javascript:;">宜宾</a></li>
-                        <li class="city-name"><a href="javascript:;">宜宾</a></li>
+                        <li class="city-name"><a href="javascript:;">江安</a></li>
                     </ul>
                 </div>
             </div>
@@ -83,7 +83,6 @@
                     <li><a href="javascript:;">C</a></li>
                 </ul>
             </div>
-
         </div>
 
     </div>
@@ -91,6 +90,7 @@
 
 <script>
     import TopNav from '../components/common/topNav/topNav'
+    import location from '../utils/location'
     export default {
         name:"address",
         components:{
@@ -103,8 +103,26 @@
                     showBack:true,
                     titleContent:'选择城市'
                 },
+//              当前城市
+                curCity:"",
             }
-        }
+        },
+      created(){
+//          获取到位置
+        let self =this;
+        location(function (url) {
+          return self.$http.jsonp(url).then(res =>{
+            console.log(res.body);
+            if (res.body.status ==0){
+              //  定位当前城市
+              self.curCity = res.body.result.addressComponent.city.replace(/市/, "");
+            }
+
+          },err =>{
+
+          })
+        });
+      }
     }
 </script>
 

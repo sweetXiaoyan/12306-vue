@@ -5,5 +5,5 @@ var loginSchema = new Schema({
     "username":String,
     "password":String
 });
-//定义一个登陆的模型抛出,表名叫logins
+//定义一个登录的模型抛出,表名叫login
 module.exports = mongoose.model("Login",loginSchema,"login");

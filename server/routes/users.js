@@ -48,6 +48,7 @@ router.get('/',function (req,res,next) {
 
 });
 
+//  登录 api
 router.post('/login',function (req,res,next) {
   var param = {
     username:req.body.username,
@@ -82,5 +83,6 @@ router.post('/login',function (req,res,next) {
 
 
 });
+
 
 module.exports = router;
