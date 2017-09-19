@@ -3,6 +3,7 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Cities = require('../modules/city');
+var FilterLetter = require('../utils/filterLetter');
 
 // 暂时省略链接数据库
 
@@ -17,18 +18,28 @@ router.get('/',function (req,res,next) {
     }
     else {
       if (doc){
-        // console.log(typeof doc.result);
-        var cityList = doc.provinces;
-        for (let item in cityList){
-          console.log(item);
-        }
+        var cityList = doc[0].provinces;
+        var cityName=[];
+        cityList.forEach((item) =>{
+          for (var i=0; i<item.citys.length; ++i){
+            cityName.push(item.citys[i].citysName);
+          }
+        });
+        console.log(FilterLetter(cityName));
+        // FilterLetter(cityName);
         res.json({
+          result:cityName,
+        });
+
+
+     //   输出
+     /*   res.json({
           status:'0',
           msg:"",
           result:{
             list:doc
           }
-        });
+        });*/
         return
       }
 
