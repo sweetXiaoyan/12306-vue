@@ -1,91 +1,76 @@
 <template>
-    <div class="checkAddress">
-        <top-nav :showContent="showContent"></top-nav>
-        <!--搜索框-->
-        <div class="search">
-            <span class="icon-search"></span>
-            <input  type="text" placeholder="中文/拼音/首字母">
-        </div>
-        <!--位置推荐-->
-        <div class="quick-location">
-            <!--定位推荐-->
-            <div class="location">
-                <div class="location-item">
-                    <span>根据您的定位推荐</span>
-                    <ul class="item-box clearfix">
-                        <li class="city-name"><a href="javascript:;">{{curCity}}</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--历史记录-->
-            <div class="location">
-                <div class="location-item">
-                    <span>历史纪录</span>
-                    <ul class="item-box clearfix">
-                        <li class="city-name"><a href="javascript:;">北京</a></li>
-                        <li class="city-name"><a href="javascript:;">上海</a></li>
-                        <li class="city-name"><a href="javascript:;">杭州</a></li>
-                        <li class="city-name"><a href="javascript:;">宜宾</a></li>
-                        <li class="city-name"><a href="javascript:;">兴城</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--热门城市-->
-            <div class="location">
-                <div class="location-item">
-                    <span>热门城市</span>
-                    <ul class="item-box clearfix">
-                        <li class="city-name"><a href="javascript:;">北京</a></li>
-                        <li class="city-name"><a href="javascript:;">上海</a></li>
-                        <li class="city-name"><a href="javascript:;">杭州</a></li>
-                        <li class="city-name"><a href="javascript:;">宜宾</a></li>
-                        <li class="city-name"><a href="javascript:;">兴城</a></li>
-                        <li class="city-name"><a href="javascript:;">宜宾</a></li>
-                        <li class="city-name"><a href="javascript:;">江安</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--字母定位-->
-        <div class="spell-location">
-            <div class="city">
-                <span class="city-litter" id="A">A</span>
-                <ul class="city-list">
-                    <li><a href="javascript:;">鞍山</a></li>
-                    <li><a href="javascript:;">阿拉善盟</a></li>
-                    <li><a href="javascript:;">安庆市</a></li>
-                    <li><a href="javascript:;">安阳市</a></li>
-                    <li><a href="javascript:;">阿里地区</a></li>
-                    <li><a href="javascript:;">安康市</a></li>
-                </ul>
-            </div>
-            <div class="city">
-                <span class="city-litter" id="B">B</span>
-                <ul class="city-list">
-                    <li><a href="javascript:;">白城市</a></li>
-                    <li><a href="javascript:;">包头市</a></li>
-                    <li><a href="javascript:;">巴彦淖尔市</a></li>
-                    <li><a href="javascript:;">保定市</a></li>
-                    <li><a href="javascript:;">本溪市</a></li>
-                    <li><a href="javascript:;">白山市</a></li>
-                </ul>
-
-            </div>
-
-            <!--字母快速定位-->
-            <div class="link-address">
-                <ul class="link-item">
-                    <li><a href="javascript:;">推荐</a></li>
-                    <li><a href="javascript:;">历史</a></li>
-                    <li><a href="javascript:;">热门</a></li>
-                    <li><a href="javascript:;">A</a></li>
-                    <li><a href="javascript:;">B</a></li>
-                    <li><a href="javascript:;">C</a></li>
-                </ul>
-            </div>
-        </div>
-
+  <div class="checkAddress">
+    <div class="positionGroup">
+      <top-nav :showContent="showContent"></top-nav>
+      <!--搜索框-->
+      <div class="search">
+        <span class="icon-search"></span>
+        <input  type="text" placeholder="中文/拼音/首字母">
+      </div>
     </div>
+    <!--位置推荐-->
+    <div class="quick-location">
+      <!--定位推荐-->
+      <div class="location">
+        <div class="location-item">
+          <span>根据您的定位推荐</span>
+          <ul class="item-box clearfix">
+            <li class="city-name"><a href="javascript:;">{{curCity}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--历史记录-->
+      <div class="location">
+        <div class="location-item">
+          <span>历史纪录</span>
+          <ul class="item-box clearfix">
+            <li class="city-name"><a href="javascript:;">北京</a></li>
+            <li class="city-name"><a href="javascript:;">上海</a></li>
+            <li class="city-name"><a href="javascript:;">杭州</a></li>
+            <li class="city-name"><a href="javascript:;">宜宾</a></li>
+            <li class="city-name"><a href="javascript:;">兴城</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--热门城市-->
+      <div class="location">
+        <div class="location-item">
+          <span>热门城市</span>
+          <ul class="item-box clearfix">
+            <li class="city-name"><a href="javascript:;">北京</a></li>
+            <li class="city-name"><a href="javascript:;">上海</a></li>
+            <li class="city-name"><a href="javascript:;">杭州</a></li>
+            <li class="city-name"><a href="javascript:;">宜宾</a></li>
+            <li class="city-name"><a href="javascript:;">兴城</a></li>
+            <li class="city-name"><a href="javascript:;">宜宾</a></li>
+            <li class="city-name"><a href="javascript:;">江安</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--字母定位-->
+    <div class="spell-location">
+      <div class="city" v-for="(citys,index) in allCity">
+        <span class="city-litter" id="A">{{citys.flage}}</span>
+        <ul class="city-list" v-for="(city,ind) in citys.names">
+          <li><a href="javascript:;">{{city.cityname}}</a></li>
+        </ul>
+      </div>
+
+      <!--字母快速定位-->
+      <div class="link-address">
+        <ul class="link-item">
+          <li><a href="javascript:;">推荐</a></li>
+          <li><a href="javascript:;">历史</a></li>
+          <li><a href="javascript:;">热门</a></li>
+          <li><a href="javascript:;">A</a></li>
+          <li><a href="javascript:;">B</a></li>
+          <li><a href="javascript:;">C</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -98,18 +83,21 @@
         },
         data(){
             return{
-                //                顶部导航
+                // 顶部导航
                 showContent:{
                     showBack:true,
                     titleContent:'选择城市'
                 },
-//              当前城市
+                // 当前城市
                 curCity:"",
+                allCity:[],
             }
         },
       created(){
-//          获取到位置
         let self =this;
+        /*
+           获取到当前位置
+        */
         location(function (url) {
           return self.$http.jsonp(url).then(res =>{
             console.log(res.body);
@@ -122,6 +110,21 @@
 
           })
         });
+        /*
+           获取全部城市
+        */
+        this.$http.get('/citys/all').then(res =>{
+          if (res.body.status ==='0'){
+            for (var key in res.body.result){
+              let param={};
+              param.flage = key;
+              param.names = res.body.result[key];
+               self.allCity.push(param);
+             }
+          }
+        },err =>{
+
+        })
       }
     }
 </script>
@@ -131,15 +134,23 @@
         width: 100%;
         background-color: #edf1fa;
         padding-bottom: 20px;
+        .positionGroup{
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background-color: #fff;
+          z-index: 99;
+        }
         /*s搜索*/
         .search{
             margin-top: 8px;
             margin-bottom:10px;
-            width: 94%;
-            margin-left: 3%;
-            padding: 0 8px;
+            width: 100%;
+            padding: 5px 10px;
             box-sizing: border-box;
             position: relative;
+            background-color: #edf1fa;
             input{
                 list-style: none;
                 display: block;
@@ -160,11 +171,11 @@
                 padding: 0 6px;
                 color: #d5d5d5;
             }
-
         }
 
         /*快速定位*/
         .quick-location{
+            margin-top:100px;
             width: 100%;
             padding:0 12px 20px 16px;
             background-color: #fff;

@@ -33,6 +33,12 @@ module.exports = {
       },
       '/users/**':{
         target:'http://localhost:3000'
+      },
+      '/citys':{
+        target:'http://localhost:3000/'
+      },
+      '/citys/**':{
+        target:'http://localhost:3000'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
