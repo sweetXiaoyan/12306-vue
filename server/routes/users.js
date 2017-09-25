@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 var mongoose = require('mongoose');
-var Login = require('../modules/login');
+var User =require('../modules/user');
 
 // console.log(mongoose);
 // 链接mongodb数据库
@@ -20,7 +19,7 @@ mongoose.connection.on('error',function () {
 /* GET users listing. */
 
 router.get('/',function (req,res,next) {
-  Login.find({},function (err,doc) {
+  User.find({},function (err,doc) {
     if (err){
       res.json({
         status:'1',
@@ -54,21 +53,20 @@ router.post('/login',function (req,res,next) {
     username:req.body.username,
     password:req.body.password
   }
-  Login.findOne(param,function (err,doc) {
+  User.findOne(param,function (err,doc) {
     if (err){
       res.json({
         status:"0",
-        msg:err.message
-
+        msg:err.message,
+        result:""
       });
     }else {
       if (doc){
         res.json({
           status:"1",
           msg:"",
-          result:{
-            username:doc.username,
-          }
+          result:doc.userId,
+
         })
       }else {
         res.json({
@@ -81,8 +79,39 @@ router.post('/login',function (req,res,next) {
     }
   })
 
-
 });
 
+// 用户相关的地址api
+router.get('/address',function (req,res,next) {
+  console.log(req.query);
+  var userId = req.query.userId;
+  if (!userId){
+    res.json({
+      status:"-1",
+      msg:"请完成登录！",
+      result:""
+    })
+  }else {
+    User.findOne({userId:userId},function (err,doc) {
+      if (err){
+        res.json({
+          status:"0",
+          msg:err,
+          result:""
+        })
+      }
+      else {
+        if (doc){
+          res.json({
+            status:"1",
+            msg:"",
+            result:doc.addressList
+          })
+        }
+      }
+    })
+  }
 
+
+})
 module.exports = router;

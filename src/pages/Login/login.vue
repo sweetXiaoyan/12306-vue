@@ -43,49 +43,54 @@
     </div>
 </template>
 <script>
-    import TopNav from '../../components/common/topNav/topNav'
-    export default {
-        name:'login',
-        components:{
-            TopNav
-        },
-        data(){
-            return{
-                username:'',
-                password:'',
-                showClearIcon:false,
-                showContent:{
-                    showBack:true,
-                    titleContent:""
-                }
-            }
-        },
-        methods:{
-            clearUer(){
-                this.username ="";
-            },
-            clearPwd(){
-                this.password ="";
-            },
-          loginCheck(){
-            this.$http.post('/users/login',{
-              username:this.username,
-              password:this.password,
-            }).then(res =>{
-              let status = res.data.status;
-              if (status ==1){
-                this.$router.push('/home');
-              }
-              else {
-                alert(res.data.msg);
-              }
-
-            }).catch(err =>{
-              console.log(err);
-            })
-          }
+  import TopNav from '../../components/common/topNav/topNav'
+  import {getCookie,addCookie} from '../../utils/cookies'
+  export default {
+    name:'login',
+    components:{
+      TopNav
+    },
+    data(){
+      return{
+        username:'',
+        password:'',
+        showClearIcon:false,
+        showContent:{
+          showBack:true,
+          titleContent:""
         }
+      }
+    },
+    methods:{
+      clearUer(){
+        this.username ="";
+      },
+      clearPwd(){
+        this.password ="";
+      },
+      // 登录
+      loginCheck(){
+        this.$http.post('/users/login',{
+          username:this.username,
+          password:this.password,
+        }).then(res =>{
+          let status = res.data.status;
+          if (status ==="1"){
+            // 添加cookie  --5分钟
+            addCookie("userId",res.data.result,5);
+            this.$router.push('/home');
+          }
+          else {
+            alert(res.data.msg);
+          }
+
+        }).catch(err =>{
+          console.log(err);
+        })
+      },
+
     }
+  }
 
 </script>
 <style lang="less" scoped>

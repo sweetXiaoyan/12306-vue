@@ -1,57 +1,53 @@
 <template>
   <div class="checkAddress">
-    <div class="positionGroup">
-      <top-nav :showContent="showContent"></top-nav>
+    <div class="positionGroup" :class="curFocus==true?'searchActive':''">
+      <top-nav :showContent="showContent" v-if="!curFocus"></top-nav>
       <!--搜索框-->
       <div class="search">
         <span class="icon-search"></span>
-        <input  type="text" placeholder="中文/拼音/首字母">
+        <input  type="text" placeholder="中文/拼音/首字母" @focus="translate" @blur="toTranslate">
       </div>
     </div>
     <!--位置推荐-->
-    <div class="quick-location">
+    <div class="quick-location" v-if="!curFocus">
       <!--定位推荐-->
       <div class="location">
         <div class="location-item">
           <span>根据您的定位推荐</span>
           <ul class="item-box clearfix">
-            <li class="city-name"><a href="javascript:;">{{curCity}}</a></li>
+            <li class="city-name">
+              <a href="javascript:;">{{curCity}}</a>
+            </li>
           </ul>
         </div>
       </div>
       <!--历史记录-->
       <div class="location">
         <div class="location-item">
-          <span>历史纪录</span>
+          <span v-if="userAddress.historyCity">历史纪录</span>
           <ul class="item-box clearfix">
-            <li class="city-name"><a href="javascript:;">北京</a></li>
-            <li class="city-name"><a href="javascript:;">上海</a></li>
-            <li class="city-name"><a href="javascript:;">杭州</a></li>
-            <li class="city-name"><a href="javascript:;">宜宾</a></li>
-            <li class="city-name"><a href="javascript:;">兴城</a></li>
+            <li class="city-name" v-for="(city ,index) in userAddress.historyCity">
+              <a href="javascript:;" >{{city | sub}}</a></li>
           </ul>
         </div>
       </div>
       <!--热门城市-->
       <div class="location">
         <div class="location-item">
-          <span>热门城市</span>
+          <span v-if="userAddress.hotCity">热门城市</span>
+          <span v-if="userAddress.hotCity">热门城市</span>
           <ul class="item-box clearfix">
-            <li class="city-name"><a href="javascript:;">北京</a></li>
-            <li class="city-name"><a href="javascript:;">上海</a></li>
-            <li class="city-name"><a href="javascript:;">杭州</a></li>
-            <li class="city-name"><a href="javascript:;">宜宾</a></li>
-            <li class="city-name"><a href="javascript:;">兴城</a></li>
-            <li class="city-name"><a href="javascript:;">宜宾</a></li>
-            <li class="city-name"><a href="javascript:;">江安</a></li>
+            <li class="city-name"  v-for="(city,index) in userAddress.hotCity">
+              <a href="javascript:;">{{city | sub}}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
     <!--字母定位-->
-    <div class="spell-location">
+    <div class="spell-location" v-if="!curFocus">
       <div class="city" v-for="(citys,index) in allCity">
-        <span class="city-litter" id="A">{{citys.flage}}</span>
+        <span class="city-litter" :id="citys.flage">{{citys.flage}}</span>
         <ul class="city-list" v-for="(city,ind) in citys.names">
           <li><a href="javascript:;">{{city.cityname}}</a></li>
         </ul>
@@ -63,19 +59,43 @@
           <li><a href="javascript:;">推荐</a></li>
           <li><a href="javascript:;">历史</a></li>
           <li><a href="javascript:;">热门</a></li>
-          <li><a href="javascript:;">A</a></li>
-          <li><a href="javascript:;">B</a></li>
-          <li><a href="javascript:;">C</a></li>
+          <li><a href="#A">A</a></li>
+          <li><a href="#B">B</a></li>
+          <li><a href="#C">C</a></li>
+          <li><a href="#D">D</a></li>
+          <li><a href="#E">E</a></li>
+          <li><a href="#F">F</a></li>
+          <li><a href="#G">G</a></li>
+          <li><a href="#H">H</a></li>
+          <li><a href="#I">I</a></li>
+          <li><a href="#J">J</a></li>
+          <li><a href="#K">K</a></li>
+          <li><a href="#L">L</a></li>
+          <li><a href="#M">M</a></li>
+          <li><a href="#N">N</a></li>
+          <li><a href="#O">O</a></li>
+          <li><a href="#P">P</a></li>
+          <li><a href="#Q">Q</a></li>
+          <li><a href="#R">R</a></li>
+          <li><a href="#S">S</a></li>
+          <li><a href="#T">T</a></li>
+          <li><a href="#U">U</a></li>
+          <li><a href="#V">V</a></li>
+          <li><a href="#W">W</a></li>
+          <li><a href="#X">X</a></li>
+          <li><a href="#Y">Y</a></li>
+          <li><a href="#Z">Z</a></li>
         </ul>
       </div>
     </div>
-
+    <div class="mask" v-if="curFocus"></div>
   </div>
 </template>
 
 <script>
     import TopNav from '../components/common/topNav/topNav'
     import location from '../utils/location'
+    import {getCookie,addCookie} from '../utils/cookies'
     export default {
         name:"address",
         components:{
@@ -88,11 +108,21 @@
                     showBack:true,
                     titleContent:'选择城市'
                 },
-                // 当前城市
+              // 当前城市
                 curCity:"",
                 allCity:[],
+                userAddress:{},
+                curFocus:false,
             }
         },
+      computed:{
+
+      },
+      filters:{
+        sub(value){
+          return value.substring(0,2);
+        }
+      },
       created(){
         let self =this;
         /*
@@ -100,7 +130,6 @@
         */
         location(function (url) {
           return self.$http.jsonp(url).then(res =>{
-            console.log(res.body);
             if (res.body.status ==0){
               //  定位当前城市
               self.curCity = res.body.result.addressComponent.city.replace(/市/, "");
@@ -123,8 +152,33 @@
              }
           }
         },err =>{
+          console.log(err);
+        });
+        /*
+           获取用户相关城市信息
+        */
+        let userId = getCookie("userId");
+        this.$http.get('/users/address',{params:{"userId":userId}}).then(res =>{
+          if(res.body.status ==="-1"){
+            /*cookie过期*/
+            alert(0);
+          }else if(res.body.status ==="1"){
+            this.userAddress = res.body.result;
+            console.log(res.body.result);
+          }
+        },err=>{})
 
-        })
+
+      },
+      methods:{
+        /*搜索框获取焦点*/
+        translate(){
+          this.curFocus = true;
+        },
+        toTranslate(){
+          this.curFocus = false;
+        }
+
       }
     }
 </script>
@@ -134,6 +188,7 @@
         width: 100%;
         background-color: #edf1fa;
         padding-bottom: 20px;
+        position:relative;
         .positionGroup{
           position: fixed;
           top: 0;
@@ -145,9 +200,9 @@
         /*s搜索*/
         .search{
             margin-top: 8px;
-            margin-bottom:10px;
+            margin-bottom:0px;
             width: 100%;
-            padding: 5px 10px;
+            padding: 6px 10px;
             box-sizing: border-box;
             position: relative;
             background-color: #edf1fa;
@@ -260,6 +315,25 @@
         ::-webkit-input-placeholder { /* WebKit browsers */
             color: #d5d5d5;
         }
+        /*搜索获取焦点*/
+        .searchActive{
+          position: fixed;
+          top: 0;
+          z-index:999;
+          .search{
+            margin-top: 0;
+            transition: all 0.5s;
+          }
 
+        }
+        .mask{
+          width: 100%;
+          height: 100%;
+          background-color: #e2e2e2;
+          position: fixed;
+          top: 0;
+          z-index: 100;
+        }
     }
+
 </style>

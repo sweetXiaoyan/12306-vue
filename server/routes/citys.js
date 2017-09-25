@@ -8,69 +8,7 @@ var pinyinClass = require('../utils/filterLetter');
 // 暂时省略链接数据库
 
 /*
-  查出排序的城市
- */
-router.get('/',function (req,res,next) {
-  Cities.find({},function (err,doc) {
-    if (err){
-      res.json({
-        status:"1",
-        msg:err.message,
-        result:[]
-      });
-    }
-    else {
-      var data=[];
-      doc.forEach(item =>{
-        data.push(item. cityname);
-    });
-
-     var doc = pinyinClass.prototype.letterSort(data);
-
-      res.json({
-        status:"0",
-        msg:"",
-        result:doc
-      })
-    }
-
-
-
-  })
-
-});
-
-/*
-  生成拼音
-*/
-router.get('/pinyin',function (req,res,next) {
-  Cities.find({},function (err,doc) {
-    if (err){
-      res.json({
-        status:"1",
-        msg:err.message,
-        result:[]
-      });
-    }
-    else {
-      doc.forEach(item =>{
-        /*
-          生成拼音
-        */
-       var str = pinyinClass.prototype.transLetter(item.cityname);
-        item.initial = str;
-      });
-      res.json({
-        status:"0",
-        msg:"",
-        result:doc
-      })
-    }
-  })
-});
-
-/*
-  a-z筛选
+  a-z筛选接口
 */
 router.get('/all',function (req,res,next) {
   Cities.find({},function (err,doc) {
@@ -80,7 +18,8 @@ router.get('/all',function (req,res,next) {
         msg:err.message,
         result:[]
       })
-    }else {
+    }
+    else {
       // a-z过滤后数据
       let matchResult ={};
       matchResult = pinyinClass.prototype.matchLetter(doc);
@@ -90,10 +29,14 @@ router.get('/all',function (req,res,next) {
         result:matchResult
       })
     }
-
   })
-
 });
+
+/*
+  选择城市 （当前用户，选中城市）
+*/
+
+
 
 
 module.exports = router;

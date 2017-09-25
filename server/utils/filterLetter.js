@@ -1,6 +1,5 @@
 /*第三方库*/
 var pinyin = require('pinyin');
-
 function pinyinClass() {
 
 }
@@ -27,7 +26,6 @@ pinyinClass.prototype.letterSort = function(arr) {
 /*
   a-z 首字母筛选
 */
-
 pinyinClass.prototype.matchLetter = function (doc) {
   var LetterObj={
     A:[],  B:[],  C:[],  D:[],  E:[],  F:[],  G:[],  H:[],  I:[],

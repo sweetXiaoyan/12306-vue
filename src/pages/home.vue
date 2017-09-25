@@ -12,7 +12,7 @@
             <div class="train-search-place clearfix">
                 <span class="place-start">
                     <span>始发站</span>
-                    <!--<a href="javascript:;">深圳</a>-->
+                    <!--<a href="javascript:;" @click="toAddress">深圳</a>-->
                     <router-link to="/address">深圳</router-link>
                 </span>
                 <span class="place-to">
@@ -101,15 +101,15 @@
         },
         data(){
             return{
-//                顶部导航
+                //顶部导航
                 showContent:{
                     showBack:false,
                     titleContent:'车票预定'
                 },
                 checked:true,
-//                底部nav当前选中项
+                //底部nav当前选中项
                 curIndex:0,
-//                底部nav数据
+                //底部nav数据
                 navList:[
                     {
                         iconName:'icon-ticket',
@@ -130,6 +130,11 @@
                 ]
 
             }
+        },
+        methods:{
+          toAddress(){
+
+          }
         }
     }
 </script>
