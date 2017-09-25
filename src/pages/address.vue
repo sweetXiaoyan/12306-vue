@@ -5,7 +5,7 @@
       <!--搜索框-->
       <div class="search">
         <span class="icon-search"></span>
-        <input  type="text" placeholder="中文/拼音/首字母" @focus="translate" @blur="toTranslate">
+        <input  type="text" placeholder="中文/拼音/首字母" @focus="translate" @blur="toTranslate" v-model="searchContent" @keydown.enter="searchCity">
       </div>
     </div>
     <!--位置推荐-->
@@ -88,7 +88,18 @@
         </ul>
       </div>
     </div>
-    <div class="mask" v-if="curFocus"></div>
+    <div class="mask" v-if="curFocus">
+      <ul class="searchList" v-if="searchCitys">
+        <li class="searchCity" v-for="(city,index) in searchCitys">
+          <a href="javascript:;">{{city}}</a>
+        </li>
+      </ul>
+      <ul class="noData" v-if="!searchCitys">
+        <li>
+          <a href="javascript:;">没有你要搜索的城市！</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -108,11 +119,14 @@
                     showBack:true,
                     titleContent:'选择城市'
                 },
-              // 当前城市
-                curCity:"",
+
+                curCity:"",  // 当前城市
                 allCity:[],
                 userAddress:{},
                 curFocus:false,
+                citysName:[], // 所有城市名字
+                searchContent:"",
+                searchCitys:[]
             }
         },
       computed:{
@@ -136,7 +150,7 @@
             }
 
           },err =>{
-
+            console.log(err);
           })
         });
         /*
@@ -144,13 +158,20 @@
         */
         this.$http.get('/citys/all').then(res =>{
           if (res.body.status ==='0'){
-            for (var key in res.body.result){
+            /*a-z 的数据*/
+            for (let key in res.body.result){
               let param={};
               param.flage = key;
               param.names = res.body.result[key];
                self.allCity.push(param);
              }
-          }
+             /*所有城市名字*/
+             for (let key in res.body.result){
+               for (let i=0; i<res.body.result[key].length; i++){
+                 this.citysName.push(res.body.result[key][i].cityname);
+               }
+             }
+             }
         },err =>{
           console.log(err);
         });
@@ -164,7 +185,6 @@
             alert(0);
           }else if(res.body.status ==="1"){
             this.userAddress = res.body.result;
-            console.log(res.body.result);
           }
         },err=>{})
 
@@ -177,8 +197,18 @@
         },
         toTranslate(){
           this.curFocus = false;
+          this.searchContent ="";
+          this.searchCitys = [];
+        },
+        searchCity(){
+          this.searchCitys = [];
+          this.citysName.forEach(item =>{
+             let index = item.indexOf(this.searchContent);
+             if (index >-1){
+                this.searchCitys.push(item);
+             }
+          });
         }
-
       }
     }
 </script>
@@ -333,6 +363,18 @@
           position: fixed;
           top: 0;
           z-index: 100;
+          .searchList{
+            margin-top:46px;
+            padding-left:16px;
+            padding-bottom:10px;
+            .searchCity{
+              line-height: 42px;
+              border-bottom: 1px solid #f2f2f2;
+              a{
+                color: #363636;
+              }
+            }
+          }
         }
     }
 

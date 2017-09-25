@@ -12,6 +12,7 @@ function getLocaton(callback) {
           let longitude = position.coords.longitude;
 
           let param = latitude+','+longitude;
+          console.log(param);
           let url = "http://api.map.baidu.com/geocoder/v2/?ak=wLCeiRljevH7XQQGSDEbpUsgCTcK0x5H&callback=renderReverse&location="+param+"&output=json&pois=0";
           callback(url);
         },showError);
