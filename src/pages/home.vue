@@ -13,7 +13,7 @@
                 <span class="place-start">
                     <span>始发站</span>
                     <!--<a href="javascript:;" @click="toAddress">深圳</a>-->
-                    <router-link to="/address">深圳</router-link>
+                    <router-link :to="{path:'/address',query:{flag:'start'}}">{{startCity}}</router-link>
                 </span>
                 <span class="place-to">
                     <i class="icon-come-back"></i>
@@ -21,7 +21,7 @@
                 </span>
                 <span class="place-end">
                     <span>终点站</span>
-                    <a>张家界</a>
+                    <router-link :to="{path:'/address',query:{flag:'end'}}">{{endCity}}</router-link>
                 </span>
                 <div class="train-search-style">
                     <span></span>
@@ -127,9 +127,24 @@
                         iconName:'icon-my',
                         iconContent:'我的12306'
                     },
-                ]
+                ],
+                startCity:"",
+                endCity:""
 
             }
+        },
+        created(){
+          let cityname =this.$route.query.checkedCity;
+          if (cityname && this.$route.query.flag ==='start'){
+          this.startCity =cityname.substring(0,cityname.length-1);
+          }else {
+            this.startCity = "北京";
+          }
+          if (cityname && this.$route.query.flag ==='end'){
+            this.endCity = cityname.substring(0,cityname.length-1);
+          }else {
+            this.endCity = "深圳";
+          }
         },
         methods:{
           toAddress(){

@@ -49,7 +49,7 @@
       <div class="city" v-for="(citys,index) in allCity">
         <span class="city-litter" :id="citys.flage">{{citys.flage}}</span>
         <ul class="city-list" v-for="(city,ind) in citys.names">
-          <li><a href="javascript:;">{{city.cityname}}</a></li>
+          <li><a href="javascript:;" @click="checkCity(city.cityname)">{{city.cityname}}</a></li>
         </ul>
       </div>
 
@@ -91,7 +91,7 @@
     <div class="mask" v-if="curFocus">
       <ul class="searchList" v-if="searchCitys">
         <li class="searchCity" v-for="(city,index) in searchCitys">
-          <a href="javascript:;">{{city}}</a>
+          <a href="javascript:;" @click="checkCity(city)">{{city}}</a>
         </li>
       </ul>
       <ul class="noData" v-if="!searchCitys">
@@ -126,7 +126,8 @@
                 curFocus:false,
                 citysName:[], // 所有城市名字
                 searchContent:"",
-                searchCitys:[]
+                searchCitys:[],
+                checkedCity:"", //选择的城市
             }
         },
       computed:{
@@ -208,6 +209,11 @@
                 this.searchCitys.push(item);
              }
           });
+        },
+        /*选中city*/
+        checkCity(cityname){
+          let flag = this.$route.query.flag;
+          this.$router.push({path:'/home',query:{checkedCity:cityname,flag:flag}});
         }
       }
     }
@@ -333,7 +339,7 @@
             right: 10px;
             text-align: center;
             font-size: 12px;
-            line-height: 24px;
+            line-height: 19px;
             .link-item{
                 li{
                     a{
