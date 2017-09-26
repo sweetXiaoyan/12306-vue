@@ -4,6 +4,7 @@ import Login from '../pages/Login/login'
 import Register from '../pages/register'
 import Home from '../pages/home'
 import Address from '../pages/address'
+import TicketList from '../pages/ticketList'
 Vue.use(VueRouter)
 
 export default  new VueRouter({
@@ -24,6 +25,10 @@ export default  new VueRouter({
         {
             path:"/address",
             component:Address
+        },
+        {
+            path:"/ticketList",
+            component:TicketList
         }
 
     ]

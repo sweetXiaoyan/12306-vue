@@ -104,7 +104,7 @@
 </template>
 
 <script>
-    import TopNav from '../components/common/topNav/topNav'
+    import TopNav from '../components/common/topNav/index'
     import location from '../utils/location'
     import {getCookie,addCookie} from '../utils/cookies'
     export default {

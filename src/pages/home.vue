@@ -45,8 +45,9 @@
                 </span>
             </div>
             <div class="train-search-btn">
-                <a href="javascript:;" class="searchBtn">
-                    <i class="icon-search"></i>查 询</a>
+                <router-link to="/ticketList" class="searchBtn">
+                    <i class="icon-search"></i>查 询
+                </router-link>
             </div>
             <div class="train-search-tips">
                 <span class="icon-tips"></span>
@@ -93,7 +94,7 @@
 </template>
 
 <script>
-    import TopNav from '../components/common/topNav/topNav'
+    import TopNav from '../components/common/topNav/index'
     export default{
         name:'home',
         components:{
