@@ -45,7 +45,8 @@ datePicker.prototype.dealTime =function(params) {
   }
 
    let times ={
-    month:(mnow+1) >9 ? (mnow+1) : '0'+(mnow+1)+"月",
+    // >9 ? (mnow+1) : '0'+(mnow+1)+"月"
+    month:(mnow+1),
     days: m_rowArr
    }
    resultArr.push(times);

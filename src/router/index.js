@@ -5,7 +5,7 @@ import Register from '../pages/register'
 import Home from '../pages/home'
 import Address from '../pages/address'
 import TicketList from '../pages/ticketList'
-import CeShi from '../pages/time'
+import Timer from '../components/common/timer/time'
 Vue.use(VueRouter)
 
 export default  new VueRouter({
@@ -32,8 +32,8 @@ export default  new VueRouter({
             component:TicketList
         },
         {
-          path:'/ceshi',
-          component:CeShi
+          path:'/timer',
+          component:Timer
         }
 
     ]

@@ -8,6 +8,8 @@ import './assets/less/index.less'
 
 Vue.config.productionTip = false
 Vue.use(VueResource);
+/*设置全局 eventBus */
+window.eventBus = new Vue();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

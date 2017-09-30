@@ -10,18 +10,21 @@
         <li>四</li>
         <li>五</li>
         <li>六</li>
-      </ul></div>
+      </ul>
+    </div>
     <div class="timeContainer">
       <div class="timeList" v-for="(itemList,index) in m_rowArr">
         <div class="timeText">
           <span class="line fl"></span>
-          <span class="text">{{year}}年{{itemList[0].month}}</span>
+          <span class="text">{{year}}年{{itemList[0].month}}月</span>
           <span class="line fr"></span>
         </div>
         <ul class="itemList">
-          <li class="item" v-for="(item,index) in itemList[0].days" >
-            <span v-for="(time,ind) in item.row">
-              <a href="javascript:;">{{time}}</a>
+          <li class="item" v-for="(item,ind) in itemList[0].days" >
+            <span v-for="(time,ind) in item.row" @click="getCheckDate(year,itemList[0].month,time)">
+              <!--v-if="index ===0 && day < time"-->
+              <a href="javascript:;" :class="(index ===0 && day > time) ? 'past':''" v-if="!(index ===0 && day == time)">{{time}}</a>
+              <a href="javascript:;" :class="(index ===0 && day == time) ? 'today':''" v-if="index ===0 && day == time">今天</a>
             </span>
           </li>
         </ul>
@@ -31,12 +34,13 @@
 </template>
 
 <script>
-  import timePicker from './timePicker'
-  import timer from '../utils/datepicker'
+  import timer from '../../../utils/datepicker'
   export default {
     data(){
       return{
         year:"",
+        month:"",
+        day:"",
         m_rowArr:[],
       }
     },
@@ -47,20 +51,26 @@
     computed:{
 
     },
-    methods:{
-      is_leap(year){  //处理闰年问题
-        let res;
-        return (year %100 ===0 ? res =(year %400 ===0?1:0) : res =(year %4 ===0?1:0));
-      },
-
+    methods:{ //该时间段已无车次
+      getCheckDate(year,month,day){
+        if(month ===this.month +1 && day <this.day){
+          alert("！");
+          return;
+        }
+        year = year +'年';
+        month = month+"月";
+        day = day +'日';
+        eventBus.$emit('choiceDate',month+day);
+        this.$router.go(-1);
+//        this.$router.push({path:'/home',query:{month:month,day:day}});
+      }
     },
     mounted(){
       let date = new Date();
       this.year = date.getFullYear();  // 年份
-      this.mnow = date.getMonth();  //月份(比正常显示的小1)
-      this.dnow =date.getDate();  //日期
-      this.mfirst = new Date(this.ynow,this.mnow,1);  //当月第一天Date资讯
-      this.firstDay = this.mfirst.getDay();  //当月第一天星期几
+      this.month = date.getMonth();  //月份(比正常显示的小1)
+      this.day = date.getDate();  //日期
+
       /*显示当前月份以后的日期*/
       let months = [];
       for(let i=date.getMonth()+1; i<13;i++){
@@ -70,13 +80,8 @@
           month:i-1,
           day:date.getDate()
         };
-//        console.log(timer.prototype.dealTime(params));
         this.m_rowArr.push(timer.prototype.dealTime(params));
-//        console.log(this.m_rowArr);
-
       }
-
-
     }
 
   }
@@ -153,5 +158,15 @@
   }
   .fl{
     float: left;
+  }
+  .past{
+    color: #ddd !important;
+  }
+  .today{
+    background-color: #42b983;
+    display: inline-block;
+    border-radius: 6px;
+    padding: 0 4px 4px 4px;
+    color: #045733 !important;
   }
 </style>

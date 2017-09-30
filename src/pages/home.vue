@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div class="train-search-date">
-                <span class="date-msg">
-                    7月25日 今天
+                <span class="date-msg" @click="checkDateEvent">
+                    {{checkDate}}
                 </span>
                 <span class="date-icon icon-date"></span>
             </div>
@@ -130,11 +130,14 @@
                     },
                 ],
                 startCity:"",
-                endCity:""
-
+                endCity:"",
+                checkDate:'5',
+                ceshi:"zhangsan"
             }
         },
         created(){
+          let self =this;
+          /* 选择的城市 */
           let cityname =this.$route.query.checkedCity;
           if (cityname && this.$route.query.flag ==='start'){
           this.startCity =cityname.substring(0,cityname.length-1);
@@ -146,11 +149,48 @@
           }else {
             this.endCity = "深圳";
           }
+          /* 选择的日期 */
+         /* let day = this.$route.query.day;
+          let month = this.$route.query.month;
+          if (day && month){
+            this.checkDate = month + day;
+          }else {
+            this.checkDate = '2017年9月28日'
+          }*/
+
+
+
+    },
+      computed(){
+        eventBus.$on('choiceDate',data => {
+          console.log(this.$el.querySelector('.date-msg').textContent);
+          this.$el.querySelector('.date-msg').textContent = data;
+          this.$nextTick(function () {
+//              this.checkDate = data;
+
+            console.log(this.$el.querySelector('.date-msg').textContent);
+          })
+//            console.log(this.checkDate);
+        });
+      },
+        watch:{
+          checkDate(newval,oldval){
+            console.log(newval+"-------"+oldval);
+          }
+
+
         },
         methods:{
           toAddress(){
 
+          },
+          checkDateEvent(){
+            console.log(this.checkDate+ "0000");
+            this.$router.push({path:'/timer'});
           }
+        },
+        beforeDestroy(){
+          eventBus.$off('choiceDate');
         }
     }
 </script>
@@ -258,6 +298,8 @@
                 border-bottom: 1px solid #f6f8fd;
                 .date-msg{
                     vertical-align: middle;
+                    color: #0a0a0a;
+                    margin-left: 2px;
                 }
                 /*e911*/
                 .date-icon{
