@@ -60,9 +60,7 @@
         year = year +'年';
         month = month+"月";
         day = day +'日';
-        eventBus.$emit('choiceDate',month+day);
         this.$router.go(-1);
-//        this.$router.push({path:'/home',query:{month:month,day:day}});
       }
     },
     mounted(){

@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="ticketList">
     <top-nav :showContent="showContent"></top-nav>
     <div class="mainContent">

@@ -157,22 +157,7 @@
           }else {
             this.checkDate = '2017年9月28日'
           }*/
-
-
-
     },
-      computed(){
-        eventBus.$on('choiceDate',data => {
-          console.log(this.$el.querySelector('.date-msg').textContent);
-          this.$el.querySelector('.date-msg').textContent = data;
-          this.$nextTick(function () {
-//              this.checkDate = data;
-
-            console.log(this.$el.querySelector('.date-msg').textContent);
-          })
-//            console.log(this.checkDate);
-        });
-      },
         watch:{
           checkDate(newval,oldval){
             console.log(newval+"-------"+oldval);
@@ -190,7 +175,6 @@
           }
         },
         beforeDestroy(){
-          eventBus.$off('choiceDate');
         }
     }
 </script>

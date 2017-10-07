@@ -5,11 +5,11 @@ var User =require('../modules/user');
 
 // console.log(mongoose);
 // 链接mongodb数据库
-mongoose.connect('mongodb://127.0.0.1:27017/traindb');
+mongoose.connect('mongodb://127.0.0.1:27017/trainDB');
 
 //监听是否连接成功
 mongoose.connection.on("connected",function () {
-  console.log("success!");
+  console.log("数据库链接成功---success!");
 });
 
 mongoose.connection.on('error',function () {
@@ -52,8 +52,8 @@ router.post('/login',function (req,res,next) {
   var param = {
     username:req.body.username,
     password:req.body.password
-  }
-  User.findOne(param,function (err,doc) {
+  };
+    User.findOne(param,function (err,doc) {
     if (err){
       res.json({
         status:"0",
@@ -61,12 +61,11 @@ router.post('/login',function (req,res,next) {
         result:""
       });
     }else {
-      if (doc){
+        if (doc){
         res.json({
           status:"1",
           msg:"",
           result:doc.userId,
-
         })
       }else {
         res.json({
