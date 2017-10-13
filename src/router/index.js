@@ -5,7 +5,6 @@ import Register from '../pages/register'
 import Home from '../pages/home'
 import Address from '../pages/address'
 import TicketList from '../pages/ticketList'
-import Timer from '../components/common/timer/time'
 Vue.use(VueRouter)
 
 export default  new VueRouter({
@@ -30,11 +29,6 @@ export default  new VueRouter({
         {
             path:"/ticketList",
             component:TicketList
-        },
-        {
-          path:'/timer',
-          component:Timer
         }
-
     ]
 })

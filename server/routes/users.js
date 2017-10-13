@@ -5,7 +5,7 @@ var User =require('../modules/user');
 
 // console.log(mongoose);
 // 链接mongodb数据库
-mongoose.connect('mongodb://127.0.0.1:27017/trainDB');
+mongoose.connect('mongodb://127.0.0.1:27017/traindb');
 
 //监听是否连接成功
 mongoose.connection.on("connected",function () {
@@ -53,7 +53,7 @@ router.post('/login',function (req,res,next) {
     username:req.body.username,
     password:req.body.password
   };
-    User.findOne(param,function (err,doc) {
+  User.findOne(param,function (err,doc) {
     if (err){
       res.json({
         status:"0",

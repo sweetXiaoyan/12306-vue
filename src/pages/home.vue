@@ -1,104 +1,114 @@
 <template>
-    <!--主页-->
-    <div class="home">
-        <top-nav :showContent="showContent"></top-nav>
-        <ul class="slider">
-            <li>
-                <span></span>
-            </li>
-        </ul>
-        <!--查询购票-->
-        <div class="home-train-search">
-            <div class="train-search-place clearfix">
-                <span class="place-start">
-                    <span>始发站</span>
-                    <!--<a href="javascript:;" @click="toAddress">深圳</a>-->
-                    <router-link :to="{path:'/address',query:{flag:'start'}}">{{startCity}}</router-link>
-                </span>
-                <span class="place-to">
-                    <i class="icon-come-back"></i>
+    <div class="homeContent">
+      <!--主页-->
+      <div class="home">
+          <top-nav :showContent="showContent"></top-nav>
+          <ul class="slider">
+              <li>
+                  <span></span>
+              </li>
+          </ul>
+          <!--查询购票-->
+          <div class="home-train-search">
+              <div class="train-search-place clearfix">
+                  <span class="place-start">
+                      <span>始发站</span>
+                      <!--<a href="javascript:;" @click="toAddress">深圳</a>-->
+                      <router-link :to="{path:'/address',query:{flag:'start'}}">{{startCity}}</router-link>
+                  </span>
+                  <span class="place-to">
+                      <i class="icon-come-back"></i>
 
-                </span>
-                <span class="place-end">
-                    <span>终点站</span>
-                    <router-link :to="{path:'/address',query:{flag:'end'}}">{{endCity}}</router-link>
-                </span>
-                <div class="train-search-style">
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <div class="train-search-date">
-                <span class="date-msg" @click="checkDateEvent">
-                    {{checkDate}}
-                </span>
-                <span class="date-icon icon-date"></span>
-            </div>
-            <div class="train-search-type">
-                <span class="train-type">
-                    <span>高铁动车</span>
-                    <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
-                </span>
-                <span class="customer-type">
-                    <span>学生票</span>
-                    <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
-                </span>
-            </div>
-            <div class="train-search-btn">
-                <router-link to="/ticketList" class="searchBtn">
-                    <i class="icon-search"></i>查 询
-                </router-link>
-            </div>
-            <div class="train-search-tips">
-                <span class="icon-tips"></span>
-                <span class="tips-content">
-                    <span>深圳-上海</span>
-                    <span>深圳-呼和浩特</span>
-                    <span>深圳-张家界</span>
-                </span>
-                <span class="tips-clear">
-                    <a href="javascript:;">清除全部</a>
-                </span>
-            </div>
-        </div>
-        <div class="home-section">
-            <div class="section">
-                <span class="icon-train"></span>
-                <p>正晚点</p>
-            </div>
-            <div class="section">
-                <span class="icon-order"></span>
-                <p>订餐服务</p>
-                <i class="hot">红包</i>
-            </div>
-            <div class="section">
-                <span class="icon-taxi"></span>
-                <p>约车服务</p>
-            </div>
-        </div>
-        <div class="home-notice">
-            <span class="icon-notice"></span>
-            <span class="notice-content">
-                温馨提示：铁路12306每日06：00-23：00提供服务，在铁路12306购票，改签和退票须不晚于开车前30分钟
-            </span>
-            <span class="icon-notice-clear"></span>
+                  </span>
+                  <span class="place-end">
+                      <span>终点站</span>
+                      <router-link :to="{path:'/address',query:{flag:'end'}}">{{endCity}}</router-link>
+                  </span>
+                  <div class="train-search-style">
+                      <span></span>
+                      <span></span>
+                  </div>
+              </div>
+              <div class="train-search-date">
+                  <span class="date-msg" @click="checkDateEvent">
+                      {{checkDate}}
+                  </span>
+                  <span class="date-icon icon-date"></span>
+              </div>
+              <div class="train-search-type">
+                  <span class="train-type">
+                      <span>高铁动车</span>
+                      <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
+                  </span>
+                  <span class="customer-type">
+                      <span>学生票</span>
+                      <a href="javascript:;" :class="checked ? '':'checked'" @click="checked = !checked"></a>
+                  </span>
+              </div>
+              <div class="train-search-btn">
+                  <router-link to="/ticketList" class="searchBtn">
+                      <i class="icon-search"></i>查 询
+                  </router-link>
+              </div>
+              <div class="train-search-tips">
+                  <span class="icon-tips"></span>
+                  <span class="tips-content">
+                      <span>深圳-上海</span>
+                      <span>深圳-呼和浩特</span>
+                      <span>深圳-张家界</span>
+                  </span>
+                  <span class="tips-clear">
+                      <a href="javascript:;">清除全部</a>
+                  </span>
+              </div>
+          </div>
+          <div class="home-section">
+              <div class="section">
+                  <span class="icon-train"></span>
+                  <p>正晚点</p>
+              </div>
+              <div class="section">
+                  <span class="icon-order"></span>
+                  <p>订餐服务</p>
+                  <i class="hot">红包</i>
+              </div>
+              <div class="section">
+                  <span class="icon-taxi"></span>
+                  <p>约车服务</p>
+              </div>
+          </div>
+          <div class="home-notice">
+              <span class="icon-notice"></span>
+              <span class="notice-content">
+                  温馨提示：铁路12306每日06：00-23：00提供服务，在铁路12306购票，改签和退票须不晚于开车前30分钟
+              </span>
+              <span class="icon-notice-clear"></span>
 
-        </div>
-        <div class="nav">
-            <div class="nav-item" v-for="(item,index) in navList" v-bind:class="{'active-color':curIndex ===index}" @click="curIndex = index">
-                <span :class="item.iconName"></span>
-                <p>{{item.iconContent}}</p>
-            </div>
-        </div>
-    </div>
+          </div>
+          <div class="nav">
+              <div class="nav-item" v-for="(item,index) in navList" v-bind:class="{'active-color':curIndex ===index}" @click="curIndex = index">
+                  <span :class="item.iconName"></span>
+                  <p>{{item.iconContent}}</p>
+              </div>
+          </div>
+
+      </div>
+      <!--时间蒙版层-->
+      <div class="timerMask" v-show="timeMask">
+        <time-picker v-on:time-mask="hideMask"></time-picker>
+      </div>
+
+  </div>
 </template>
 
 <script>
     import TopNav from '../components/common/topNav/index'
+    import TimePicker from '../components/common/timer/time'
     export default{
         name:'home',
         components:{
-            TopNav
+            TopNav,
+          TimePicker
         },
         data(){
             return{
@@ -131,7 +141,7 @@
                 ],
                 startCity:"",
                 endCity:"",
-                checkDate:'5',
+                timeMask:false,
                 ceshi:"zhangsan"
             }
         },
@@ -158,20 +168,22 @@
             this.checkDate = '2017年9月28日'
           }*/
     },
-        watch:{
-          checkDate(newval,oldval){
-            console.log(newval+"-------"+oldval);
+        computed:{
+          checkDate(){
+            return this.$store.state.checkedTime;
           }
-
-
         },
         methods:{
           toAddress(){
 
           },
+          /*选择时间*/
           checkDateEvent(){
-            console.log(this.checkDate+ "0000");
-            this.$router.push({path:'/timer'});
+            this.timeMask = true;
+          },
+          /*隐藏蒙版*/
+          hideMask(){
+            this.timeMask = false;
           }
         },
         beforeDestroy(){
@@ -180,11 +192,14 @@
 </script>
 
 <style lang="less" scoped>
+  .homeContent{
+    background-color: #edf1fa;
+  }
     .home{
         width: 100%;
-        background-color: #edf1fa;
-        height:100%;
-        padding-bottom:30px;
+        /*height:100%;*/
+        padding-bottom:70px;
+        position:relative;
         /*轮播图*/
         .slider{
             li{
@@ -504,6 +519,15 @@
     /*选中设置颜色*/
     .active-color{
         color: #1fcca9 !important;
+    }
+    .timerMask{
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     /*height: 100%;*/
+     z-index: 999;
+     background-color: rgb(255, 250, 245);
     }
 
 </style>

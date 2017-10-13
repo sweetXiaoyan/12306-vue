@@ -9,8 +9,10 @@
         </div>
         <div class="centerArea">
           <div class="timePicker">
-            <input type="date" id="time" name="time">
-            <span class="picker-icon"></span>
+           <a href="javascript:;">
+             <span class="icon-calendar"></span>
+             <span class="picker-icon">{{curTime}}</span>
+           </a>
           </div>
         </div>
         <div class="rightArea">
@@ -21,9 +23,42 @@
       <ul class="tickets">
         <li class="ticketItem">
           <!--上部分-->
-          <div class="partMsg"></div>
+          <div class="partMsg">
+            <div class="place start">
+              <p>深圳北</p>
+              <span>07:52</span>
+            </div>
+            <div class="between">
+              <span class="trainNum">G 520</span>
+              <a href="javascript:;">
+                <i class="icon-start"></i>
+                <i class="hr_1"></i>
+                <i class="icon-cross"></i>
+                <i class="icon-over" v-if="false"></i>
+              </a>
+              <span class="trainTime">13:12</span>
+            </div>
+            <div class="place end">
+              <div class="endBox">
+                <p>张家界西</p>
+                <span>18:20</span>
+              </div>
+            </div>
+            <div class="price">
+              <p>￥<span>150起</span>
+              </p>
+            </div>
+          </div>
+          <div class="hr_dash"></div>
           <!--下部分-->
-          <div class="otherMsg"></div>
+          <div class="otherMsg">
+            <span>商务座：0张</span>
+            <span>一等座：0张</span>
+            <span class="hasExist">二等座：3张</span>
+            <span class="hasExist">无座：440张</span>
+            <i class="halfRound leftCircle"></i>
+            <i class="halfRound rightCircle"></i>
+          </div>
         </li>
       </ul>
       <!--其他交通方案-->
@@ -59,6 +94,11 @@
           showBack:true,
           titleContent:'深圳北 张家界西'
         },
+      }
+    },
+    computed:{
+      curTime(){
+        return this.$store.state.checkedTime;
       }
     }
   }
@@ -111,8 +151,130 @@
         width: 60%;
         display: inline-block;
         text-align: center;
-        input{
+        .timePicker{
+          a{
+            color: #373737;
+            span{
+              vertical-align: middle;
+            }
+          }
+          .icon-calendar{
+            display: inline-block;
+          }
+          .icon-calendar::after{
+            content: "\e911";
+            font-size: 16px;
+            color: #cbcbcb;
+          }
 
+        }
+      }
+    }
+
+    /*车票列表信息*/
+    .tickets{
+      margin-top: 10px;
+      padding: 10px 5% 6px 5%;
+      .ticketItem{
+        background-color: white;
+        padding: 10px 14px 6px 14px;
+        border-radius: 4px;
+        .partMsg{
+          display: flex;
+          div{
+            flex: 1;
+            font-size: 14px;
+            p{
+              margin-bottom: 10px;
+            }
+          }
+          .price{
+            text-align: right;
+            color: #ff8623;
+            p{
+              font-size: 12px;
+              span{
+                font-size: 14px;
+              }
+            }
+          }
+          .place{
+            span{
+              color: #09c7a0;
+            }
+          }
+          .between{
+            text-align: center;
+            span{
+              display: block;
+              color: #cbcbcb;
+              font-size: 13px;
+            }
+            .icon-start::after{
+              content: "\e913";
+              font-size: 12px;
+              font-weight: bold;
+              color: #10c9a3;
+            }
+            .icon-cross::after{
+              content: "\e90d";
+              font-size: 12px;
+              font-weight: bold;
+              color: #10c9a3;
+            }
+            .icon-over::after{
+              content: "\e925";
+              font-size: 12px;
+              font-weight: bold;
+              color: #10c9a3;
+            }
+            .hr_1{
+              display: inline-block;
+              width: 20px;
+              height: 5px;
+              border-top: 1px solid #42b983;
+            }
+          }
+          .end{
+            width: 100%;
+            text-align:right;
+            .endBox{
+              text-align: center;
+            }
+          }
+        }
+        .hr_dash{
+          width: 100%;
+          height: 10px;
+          border-bottom: 1px dashed #ececec;
+        }
+        .otherMsg{
+          padding: 6px 0 4px 0;
+          display: flex;
+          font-size:12px;
+          position: relative;
+          span{
+            flex: 1;
+            color: #b4b4b4;
+          }
+          .hasExist{
+            color: #0a0a0a;
+          }
+          .halfRound{
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #edf1fa;
+            border-radius: 50%;
+            position: absolute;
+            top: -7px;
+          }
+          .leftCircle{
+            left: -19px;
+          }
+          .rightCircle{
+            right: -19px;
+          }
         }
       }
     }

@@ -51,8 +51,9 @@
     computed:{
 
     },
-    methods:{ //该时间段已无车次
+    methods:{
       getCheckDate(year,month,day){
+        //该时间段已无车次
         if(month ===this.month +1 && day <this.day){
           alert("！");
           return;
@@ -60,7 +61,11 @@
         year = year +'年';
         month = month+"月";
         day = day +'日';
-        this.$router.go(-1);
+        /*修改值*/
+        this.$store.commit('changeTime',month+day);
+        /*隐藏蒙版*/
+        this.$emit('time-mask');
+
       }
     },
     mounted(){
@@ -88,11 +93,12 @@
 <style lang="less">
   .time{
     width: 100%;
+    /*height:100%;*/
     .topCon{
       width: 100%;
-      position:fixed;
-      top:0;
-      left:0;
+      /*position:fixed;*/
+      /*top:0;*/
+      /*left:0;*/
       .tips{
         display: inline-block;
         width: 100%;
@@ -107,7 +113,7 @@
         display: flex;
         background-color:#eee;
         padding:10px 0;
-      li{
+        li{
         flex: 1;
         text-align: center;
       }
@@ -116,7 +122,7 @@
 
     .timeContainer{
       width: 100%;
-      margin-top:88px;
+      /*margin-top:88px;*/
       .timeList{
         width: 100%;
         .timeText{
@@ -139,7 +145,7 @@
           li{
             display: flex;
             text-align:center;
-            padding:6px 0;
+            padding:18px 0;
             span{
               flex: 1;
               a{
