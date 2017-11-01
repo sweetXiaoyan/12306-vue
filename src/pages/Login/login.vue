@@ -70,7 +70,7 @@
       },
       // 登录
       loginCheck(){
-        this.$http.post('/users/login',{
+       /* this.$http.post('/users/login',{
           username:this.username,
           password:this.password,
         }).then(res =>{
@@ -86,7 +86,9 @@
 
         }).catch(err =>{
           console.log(err);
-        })
+        })*/
+       // 先写前端页面
+        this.$router.push('/home');
       },
 
     }
