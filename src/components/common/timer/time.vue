@@ -20,6 +20,7 @@
           <span class="line fr"></span>
         </div>
         <ul class="itemList">
+          <!-- <li class="item" v-for="(item,ind) in itemList[0].days"  :class="(index===currentIndex ? 'active':'className')" @click="curentIndex =index">-->
           <li class="item" v-for="(item,ind) in itemList[0].days" >
             <span v-for="(time,ind) in item.row" @click="getCheckDate(year,itemList[0].month,time)">
               <!--v-if="index ===0 && day < time"-->
